@@ -16,12 +16,21 @@
 
 .mainFeed {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
 }
 
 .tweetShow {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.tweet {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+  padding: 10px;
+  border: solid 2px black;
+  width: 500px;
 }

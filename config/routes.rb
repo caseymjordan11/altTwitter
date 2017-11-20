@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  root to: 'houses#index'
+  root to: 'tweets#index'
 
-  resources :houses do
-    resources :charachters, except: [:index]
+  resources :tweets do
+    resources :replies, except: [:index]
   end
 
 end

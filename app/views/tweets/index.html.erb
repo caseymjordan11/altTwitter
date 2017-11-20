@@ -4,9 +4,9 @@
   <div class="mainFeed">
     <ul>
       <% @tweets.each do |tweet| %>
-        <li>
-          <%= link_to tweet.name, tweet %>
-        </li>
+        <div class="tweet">
+          <%= link_to tweet.content, tweet %>
+        </div>
       <% end %>
     </ul>
   </div>
