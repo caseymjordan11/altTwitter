@@ -1,0 +1,13 @@
+<h2>Tweets <%= link_to "(+)", new_tweet_path(@tweet) %></h2>
+
+<body>
+  <div class="mainFeed">
+    <ul>
+      <% @tweets.each do |tweet| %>
+        <li>
+          <%= link_to tweet.name, tweet %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</body>

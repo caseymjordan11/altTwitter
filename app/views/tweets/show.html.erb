@@ -1,0 +1,10 @@
+<div class="tweetShow">
+  <h4>Replies<%= link_to "(+)", new_tweet_reply_path(@tweet) %></h4>
+  <ol>
+    <% @tweet.replies.each do |reply| %>
+    <li>
+      <p><%="#{reply.content}"%> <%= link_to "(view)", tweet_reply_path(@tweet, reply)%></p>
+    </li>
+    <% end %>
+  </ol>
+</div>

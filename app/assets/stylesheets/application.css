@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+.mainFeed {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tweetShow {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
