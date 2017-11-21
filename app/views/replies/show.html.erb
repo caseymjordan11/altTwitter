@@ -1,1 +1,5 @@
 <h2>Reply: <%= @reply.content %> </h2>
+
+<%= form_for @reply, method: :delete do |f| %>
+  <%= f.submit "Delete!"%>
+<% end %>

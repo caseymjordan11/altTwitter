@@ -13,14 +13,19 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @tweet = Tweet.create(tweet_params)
+    @tweet = Tweet.create(tweet_params.merge(user: current_user))
     redirect_to tweet_path(@tweet)
   end
 
 
   def destroy
     @tweet = Tweet.find(params[:id])
-    @tweet.destroy
+
+    if @tweet.user == current_user
+      @tweet.destroy
+    else
+      flash[:alert]= "only user can delete own tweets"
+    end
 
     redirect_to tweets_path
   end
