@@ -6,28 +6,29 @@
             <% @tweets.each do |tweet| %>
             <div class="tweet">
 
-              <div class="tweetcontent">
-                <p><%= link_to "#{tweet.content}", tweet_path(tweet) %></p>
-              </div>
+              <p><%= link_to "#{tweet.content}", tweet_path(tweet) %></p>
 
-              <div class="tweetcontent">
-                <% if tweet.users.include? current_user %>
-                  <p><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
-                <% else %>
-                  <p><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
-                <% end %>
-                <p><%= tweet.favorites.count %> </p>
-              </div>
-
-              <div class="tweetcontent">
-                <% if (((Time.now - tweet.created_at)/60/60).round) > 24 %>
-                  <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d ago</p>
-                  <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
-                    <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h ago</p>
+              <div class="tweetstats">
+                <div class="tweetcontent">
+                  <% if tweet.users.include? current_user %>
+                    <p><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
                   <% else %>
-                    <p><%= (((Time.now - tweet.created_at)/60).round) %>m ago</p>
+                    <p><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
                   <% end %>
+                  <p><%= tweet.favorites.count %> </p>
+                </div>
+
+                <div class="tweetcontent">
+                  <% if (((Time.now - tweet.created_at)/60/60).round) > 24 %>
+                    <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d ago</p>
+                    <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
+                      <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h ago</p>
+                    <% else %>
+                      <p><%= (((Time.now - tweet.created_at)/60).round) %>m ago</p>
+                    <% end %>
+                </div>
               </div>
+
             </div>
             <% end %>
           </ul>

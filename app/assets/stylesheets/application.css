@@ -29,6 +29,7 @@
 .tweet {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin: 10px auto;
   padding: 10px;
   border: solid 2px black;
@@ -40,6 +41,12 @@
   justify-content: center;
   margin: 10px;
   padding: 10px;
+}
+
+.tweetstats {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }
 
 .fav {
