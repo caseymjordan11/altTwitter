@@ -34,3 +34,20 @@
   border: solid 2px black;
   width: 500px;
 }
+
+.tweetcontent {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.fav {
+  color: red;
+  text-decoration: none !important;
+}
+
+.nofav {
+  color: lightgrey;
+  text-decoration: none !important;
+}

@@ -7,4 +7,12 @@ Rails.application.routes.draw do
     resources :replies, except: [:index]
   end
 
+
+  resources :tweets, only: [:index, :show] do
+    member do
+      post 'add_favorite'
+      delete 'remove_favorite'
+    end
+  end
+
 end
