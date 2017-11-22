@@ -12,6 +12,10 @@
               <div class="tweetstats">
 
                 <div class="tweetcontent">
+                  <img class = 'tweetpic' src = "<%= @users.find(@user_id).avatar%>" alt = "prof pic" >
+                </div>
+
+                <div class="tweetcontent">
                   <a href="/users/<%= tweet.user_id%>"><%= @users.find(@user_id).username %></a>
                 </div>
 
