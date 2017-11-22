@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="tweetcontent">
-                  <% if (((Time.now - tweet.created_at)/60/60).round) > 24 %>
+                  <% if (((Time.now - tweet.created_at)/60/60).round) > 23 %>
                     <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d ago</p>
                     <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
                       <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h ago</p>
