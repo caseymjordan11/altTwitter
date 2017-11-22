@@ -9,6 +9,11 @@
               <p><%= link_to "#{tweet.content}", tweet_path(tweet) %></p>
 
               <div class="tweetstats">
+
+                <div class="tweetcontent">
+                  <p><%= link_to "#{tweet.user_id}", user_path(tweet) %></p>
+                </div>
+
                 <div class="tweetcontent">
                   <% if tweet.users.include? current_user %>
                     <p><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
