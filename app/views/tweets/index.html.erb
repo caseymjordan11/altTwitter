@@ -4,6 +4,7 @@
       <div class="mainFeed">
           <ul>
             <% @tweets.each do |tweet| %>
+            <% @userid = tweet.user_id%>
             <div class="tweet">
 
               <p><%= link_to "#{tweet.content}", tweet_path(tweet) %></p>
@@ -11,7 +12,7 @@
               <div class="tweetstats">
 
                 <div class="tweetcontent">
-                  <p><%= link_to "#{tweet.user_id}", user_path(tweet) %></p>
+                  <a href="/users/<%= tweet.user_id%>"><%=tweet.user_id%></a>
                 </div>
 
                 <div class="tweetcontent">

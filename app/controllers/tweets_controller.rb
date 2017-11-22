@@ -4,8 +4,6 @@ class TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.order("created_at DESC").all
-
-    @d = DateTime.now
   end
 
   def show
