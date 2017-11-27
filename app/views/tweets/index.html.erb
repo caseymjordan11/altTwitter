@@ -1,11 +1,11 @@
 <h2>Tweets <%= link_to "(+)", new_tweet_path(@tweet) %></h2>
 
+<h3>Users<%= link_to "(see all users)", users_path %></h3>
+
 <body>
       <div class="mainFeed">
           <ul>
             <% @tweets.each do |tweet| %>
-
-
             <% @user_id = (tweet.user_id).to_i %>
             <div class="tweet">
 
