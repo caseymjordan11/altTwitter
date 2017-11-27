@@ -5,24 +5,24 @@
 
 
 <p><%= @user.followers.count %> </p>
+
 <p><%= @user.following.count %> </p>
+
+
 
 <% if current_user.id != @user.id %>
   <% if !current_user.following?(@user) %>
-    <%= form_for(current_user.active_relationships.build) do |f| %>
+    <%= form_for(current_user.follow_relationships.create) do |f| %>
         <%= hidden_field_tag :followed_id, @user.id %>
         <%= f.submit "Follow" %>
       <% end %>
     <% else %>
-      <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+      <%= form_for(current_user.follow_relationships.find_by(followed_id: @user.id),
           html: {method: :delete}) do |f| %>
           <%= f.submit "Unfollow" %>
           <% end %>
     <% end %>
 <% end %>
-
-
-
 
 
 <img class = 'profpic' src="<%= @user.avatar %>" alt="Prof Pic">

@@ -3,8 +3,9 @@ class TweetsController < ApplicationController
 
 
   def index
-    @tweets = Tweet.order("created_at DESC").all
-    @users = User.all 
+    @tweets = Tweet.where(user_id: current_user.following.ids)
+
+    @users = User.all
   end
 
   def show
