@@ -63,8 +63,55 @@ header {
 
 .mainFeed {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+}
+
+.userContainer {
+  width: 300px;
+  border: solid grey 2px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.first_row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.userstats {
+  display: flex;
+  flex-direction: row;
+}
+
+.second_row {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+}
+
+.number {
+  font-family: helvetica, sans-serif;
+  color: blue;
+  margin-top: 0px;
+  margin-left: 20px;
+}
+
+.userfollowcount {
+  padding: 0px 20px;
+}
+
+.userinfo {
+  padding-top: 33px;
+}
+
+.userpic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 10px;
 }
 
 .tweetShow {
@@ -85,7 +132,7 @@ header {
   flex-direction: column;
   margin: 10px auto;
   padding: 10px;
-  border: solid 2px black;
+  border: solid 2px grey;
   width: 500px;
   background-color: white;
 }

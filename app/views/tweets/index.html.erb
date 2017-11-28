@@ -1,60 +1,100 @@
 <body>
       <div class="mainFeed">
-          <h2 class= "newtweet">
-            What's happening? <%= link_to "(+)", new_tweet_path(@tweet) %>
-          </h2>
-          <ul>
-            <% @tweets.each do |tweet| %>
-            <% @user_id = (tweet.user_id).to_i %>
-            <div class="tweet">
-              <div class="tweetstats">
 
+            <div class="userSection">
+              <div class="userContainer">
+                <div class = "first_row">
+                  <div class="pic">
+                    <img class = 'userpic' src = "<%= current_user.avatar%>" alt = "prof pic">
+                  </div>
 
-                <div class="tweetUserInfo">
-                    <div class="tweetusercontent">
-                      <img class = 'tweetpic' src = "<%= @users.find(@user_id).avatar%>" alt = "prof pic" >
+                  <div class="userinfo">
+                    <div class="userfullname">
+                      <strong><%= "#{current_user.first_name} #{current_user.last_name}"%></strong>
                     </div>
-                    <div class="tweetfullname">
-                      <strong><%="#{@users.find(@user_id).first_name} #{@users.find(@user_id).last_name}"%></strong>
+                    <div class="userusername">
+                      <p>@<%= link_to "#{current_user.username}", user_path(current_user)%></p>
                     </div>
-                    <div class="tweetusername">
-                      <a href="/users/<%= tweet.user_id%>">@<%= @users.find(@user_id).username %></a>
-                    </div>
-                    <div class="tweetusercontent">
-                      <% if (((Time.now - tweet.created_at)/60/60).round) > 23 %>
-                        <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d</p>
-                        <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
-                          <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h</p>
-                        <% else %>
-                          <p><%= (((Time.now - tweet.created_at)/60).round) %>m</p>
-                        <% end %>
-                    </div>
-
+                  </div>
                 </div>
 
-
-                    <div class="tweetcontent">
-                      <p><%= tweet.content %></p>
+                <div class = "second_row">
+                  <div class = "userstats">
+                    <div class="usertweetcount">
+                      <p>Tweets</p>
+                      <strong class = "number"><%=current_user.tweets.count %></strong>
                     </div>
-                    <div class="tweetcontent">
-                      <% if tweet.users.include? current_user %>
-                        <p class = "stats"><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
-                      <% else %>
-                        <p class = "stats"><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
-                      <% end %>
-                        <p class = "stats"><%= tweet.favorites.count %> </p>
 
-                        <p class = "stats"><%= link_to "&#10149;".html_safe, new_tweet_reply_path(tweet), class: "nofav"%></p>
-
-                        <p class = "stats"><%= tweet.replies.count %></p>
-
-                        <div class="viewtweet">
-                          <p><%= link_to "View Tweet", tweet_path(tweet) %></p>
-                        </div>
+                    <div class="userfollowcount">
+                      <p>Followers</p>
+                      <strong class = "number"><%= current_user.followers.count %></strong>
                     </div>
+
+                    <div class="userfollowingcount">
+                      <p>Following</p>
+                      <strong class = "number"><%=current_user.following.count %></strong>
+                    </div>
+                  </div>
                 </div>
               </div>
-            <% end %>
-          </ul>
-        </div>
+            </div>
+
+
+            <div class="tweetSection">
+                  <h2 class= "newtweet">
+                    What's happening? <%= link_to "(+)", new_tweet_path(@tweet) %>
+                  </h2>
+                  <ul>
+                    <% @tweets.each do |tweet| %>
+                    <% @user_id = (tweet.user_id).to_i %>
+                    <div class="tweet">
+                      <div class="tweetstats">
+
+
+                        <div class="tweetUserInfo">
+                            <div class="tweetusercontent">
+                              <img class = 'tweetpic' src = "<%= @users.find(@user_id).avatar%>" alt = "prof pic" >
+                            </div>
+                            <div class="tweetfullname">
+                              <strong><%="#{@users.find(@user_id).first_name} #{@users.find(@user_id).last_name}"%></strong>
+                            </div>
+                            <div class="tweetusername">
+                              <a href="/users/<%= tweet.user_id%>">@<%= @users.find(@user_id).username %></a>
+                            </div>
+                            <div class="tweetusercontent">
+                              <% if (((Time.now - tweet.created_at)/60/60).round) > 23 %>
+                                <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d</p>
+                                <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
+                                  <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h</p>
+                                <% else %>
+                                  <p><%= (((Time.now - tweet.created_at)/60).round) %>m</p>
+                                <% end %>
+                            </div>
+
+                        </div>
+                            <div class="tweetcontent">
+                              <p><%= tweet.content %></p>
+                            </div>
+                            <div class="tweetcontent">
+                              <% if tweet.users.include? current_user %>
+                                <p class = "stats"><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
+                              <% else %>
+                                <p class = "stats"><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
+                              <% end %>
+                                <p class = "stats"><%= tweet.favorites.count %> </p>
+
+                                <p class = "stats"><%= link_to "&#10149;".html_safe, new_tweet_reply_path(tweet), class: "nofav"%></p>
+
+                                <p class = "stats"><%= tweet.replies.count %></p>
+
+                                <div class="viewtweet">
+                                  <p><%= link_to "View Tweet", tweet_path(tweet) %></p>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </ul>
+            </div>
+      </div>
 </body>
