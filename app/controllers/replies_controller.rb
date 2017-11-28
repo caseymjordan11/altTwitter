@@ -24,7 +24,13 @@ class RepliesController < ApplicationController
 
   def update
     @reply = Reply.find(params[:id])
-    @reply.update(reply_params)
+
+    if @reply.user == current_user
+      @reply.update(reply_params)
+    else
+      flash[:alert] = "Only user can edit their own replies"
+    end
+
     redirect_to tweet_reply_path(@reply)
   end
 
