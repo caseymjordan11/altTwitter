@@ -1,5 +1,4 @@
 <body>
-
       <div class="mainFeed">
           <h2 class= "newtweet">
             What's happening? <%= link_to "(+)", new_tweet_path(@tweet) %>
@@ -8,42 +7,53 @@
             <% @tweets.each do |tweet| %>
             <% @user_id = (tweet.user_id).to_i %>
             <div class="tweet">
-
-              <p><%= link_to "#{tweet.content}", tweet_path(tweet) %></p>
-
               <div class="tweetstats">
 
-                <div class="tweetcontent">
-                  <img class = 'tweetpic' src = "<%= @users.find(@user_id).avatar%>" alt = "prof pic" >
+
+                <div class="tweetUserInfo">
+                    <div class="tweetusercontent">
+                      <img class = 'tweetpic' src = "<%= @users.find(@user_id).avatar%>" alt = "prof pic" >
+                    </div>
+                    <div class="tweetfullname">
+                      <strong><%="#{@users.find(@user_id).first_name} #{@users.find(@user_id).last_name}"%></strong>
+                    </div>
+                    <div class="tweetusername">
+                      <a href="/users/<%= tweet.user_id%>">@<%= @users.find(@user_id).username %></a>
+                    </div>
+                    <div class="tweetusercontent">
+                      <% if (((Time.now - tweet.created_at)/60/60).round) > 23 %>
+                        <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d</p>
+                        <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
+                          <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h</p>
+                        <% else %>
+                          <p><%= (((Time.now - tweet.created_at)/60).round) %>m</p>
+                        <% end %>
+                    </div>
+
                 </div>
 
-                <div class="tweetcontent">
-                  <a href="/users/<%= tweet.user_id%>"><%= @users.find(@user_id).username %></a>
-                </div>
 
-                <div class="tweetcontent">
-                  <% if tweet.users.include? current_user %>
-                    <p><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
-                  <% else %>
-                    <p><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
-                  <% end %>
-                  <p><%= tweet.favorites.count %> </p>
-                </div>
+                    <div class="tweetcontent">
+                      <p><%= tweet.content %></p>
+                    </div>
+                    <div class="tweetcontent">
+                      <% if tweet.users.include? current_user %>
+                        <p class = "stats"><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
+                      <% else %>
+                        <p class = "stats"><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
+                      <% end %>
+                        <p class = "stats"><%= tweet.favorites.count %> </p>
 
-                <div class="tweetcontent">
-                  <% if (((Time.now - tweet.created_at)/60/60).round) > 23 %>
-                    <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d ago</p>
-                    <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
-                      <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h ago</p>
-                    <% else %>
-                      <p><%= (((Time.now - tweet.created_at)/60).round) %>m ago</p>
-                    <% end %>
+                        <p class = "stats"><%= link_to "&#10149;".html_safe, new_tweet_reply_path(tweet), class: "nofav"%></p>
+
+                        <p class = "stats"><%= tweet.replies.count %></p>
+
+                        <div class="viewtweet">
+                          <p><%= link_to "View Tweet", tweet_path(tweet) %></p>
+                        </div>
+                    </div>
                 </div>
               </div>
-
-            </div>
-
-
             <% end %>
           </ul>
         </div>

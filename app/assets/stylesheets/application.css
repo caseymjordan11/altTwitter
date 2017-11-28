@@ -32,12 +32,20 @@ header {
   border-bottom: 2px lightgrey solid;
 }
 
+.stats {
+  padding: 0px 5px;
+}
+
 .head {
   display: flex;
   justify-content: center;
   flex-direction: row;
   justify-content: space-between;
   padding: 0px 20px;
+}
+
+.viewtweet {
+  margin-left: 5px;
 }
 
 .headCont {
@@ -85,14 +93,38 @@ header {
 .tweetcontent {
   display: flex;
   justify-content: center;
-  margin: 10px;
-  padding: 10px;
+}
+
+.tweetUserInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0px;
+}
+
+.tweetusername {
+  margin-top: 15px;
+}
+
+.tweetusercontent {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.tweetfullname {
+  margin-top: 15px;
+  margin-right: 5px;
+}
+
+
+a {
+  text-decoration: none;
 }
 
 .tweetstats {
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .fav {
