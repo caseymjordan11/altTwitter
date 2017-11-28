@@ -1,79 +1,126 @@
-<p><%= @user.email %> </p>
-<p><%= @user.first_name %></p>
-<p><%= @user.last_name %></p>
-<p><%= @user.username %></p>
+<div class="userpage">
+
+      <div class="usersideuserpage">
+        <div class="userpageprofpic">
+          <img class = 'profpic' src = "<%= @user.avatar%>" alt = "prof pic" >
+        </div>
+        <div class="userContainer">
 
 
-<p><%= @user.followers.count %> </p>
-<p><%= @user.following.count %> </p>
+          <div class = "first_row">
 
-
-
-<% if current_user.id != @user.id %>
-  <% if !current_user.following?(@user) %>
-    <%= form_for(current_user.follow_relationships.create) do |f| %>
-        <%= hidden_field_tag :followed_id, @user.id %>
-        <%= f.submit "Follow" %>
-      <% end %>
-    <% else %>
-      <%= form_for(current_user.follow_relationships.find_by(followed_id: @user.id),
-          html: {method: :delete}) do |f| %>
-          <%= f.submit "Unfollow" %>
-          <% end %>
-    <% end %>
-<% end %>
-
-
-<img class = 'profpic' src="<%= @user.avatar %>" alt="Prof Pic">
-
-<ul>
-  <% @user.tweets.each do |tweet| %>
-  <% @user_id = (tweet.user_id).to_i %>
-  <div class="tweet">
-    <div class="tweetstats">
-
-
-      <div class="tweetUserInfo">
-          <div class="tweetusercontent">
-            <img class = 'tweetpic' src = "<%= @user.avatar%>" alt = "prof pic" >
-          </div>
-          <div class="tweetfullname">
-            <strong><%="#{@user.first_name} #{@user.last_name}"%></strong>
-          </div>
-          <div class="tweetusername">
-            <a href="/users/<%= @user.id%>">@<%= @user.username %></a>
-          </div>
-          <div class="tweetusercontent">
-            <% if (((Time.now - tweet.created_at)/60/60).round) > 23 %>
-              <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d</p>
-              <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
-                <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h</p>
-              <% else %>
-                <p><%= (((Time.now - tweet.created_at)/60).round) %>m</p>
-              <% end %>
-          </div>
-
-      </div>
-          <div class="tweetcontent">
-            <p><%= tweet.content %></p>
-          </div>
-          <div class="tweetcontent">
-            <% if tweet.users.include? current_user %>
-              <p class = "stats"><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
-            <% else %>
-              <p class = "stats"><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
-            <% end %>
-              <p class = "stats"><%= tweet.favorites.count %> </p>
-
-              <p class = "stats"><%= link_to "&#10149;".html_safe, new_tweet_reply_path(tweet), class: "nofav"%></p>
-
-              <p class = "stats"><%= tweet.replies.count %></p>
-
-              <div class="viewtweet">
-                <p><%= link_to "View Tweet", tweet_path(tweet) %></p>
+            <div class="userinfo">
+              <div class="userfullname">
+                <strong><%= "#{@user.first_name} #{@user.last_name}"%></strong>
               </div>
+              <div class="userusername">
+                <p>@<%= link_to "#{@user.username}", user_path(@user)%></p>
+              </div>
+            </div>
+
+            <div class = "followbutton">
+              <div class="followUnfollowButton">
+                <% if current_user.id != @user.id %>
+                  <% if !current_user.following?(@user) %>
+                    <%= form_for(current_user.follow_relationships.create) do |f| %>
+                        <%= hidden_field_tag :followed_id, @user.id %>
+                        <%= f.submit "Follow" %>
+                      <% end %>
+                    <% else %>
+                      <%= form_for(current_user.follow_relationships.find_by(followed_id: @user.id),
+                          html: {method: :delete}) do |f| %>
+                          <%= f.submit "Unfollow" %>
+                          <% end %>
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
           </div>
+
+
+
+          <div class = "second_row">
+            <div class = "userstats">
+              <div class="usertweetcount">
+                <p>Tweets</p>
+                <strong class = "number"><%=@user.tweets.count %></strong>
+              </div>
+
+              <div class="userfollowcount">
+                <p>Followers</p>
+                <strong class = "number"><%= @user.followers.count %></strong>
+              </div>
+
+              <div class="userfollowingcount">
+                <p>Following</p>
+                <strong class = "number"><%=@user.following.count %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  <% end %>
-</ul>
+
+      <div class="tweetContainer">
+        <div class="tweetlabel">
+          <% if @user == current_user %>
+            <h1>Tweets: <%= link_to "(+)", new_tweet_path(@tweet) %></h1>
+          <% else %>
+            <h1>Tweets: </h1>
+          <% end %>
+        </div>
+        <div class="tweetuserpage">
+          <ul>
+          <% @user.tweets.each do |tweet| %>
+          <% @user_id = (tweet.user_id).to_i %>
+          <div class="tweet">
+            <div class="tweetstats">
+
+
+              <div class="tweetUserInfo">
+                  <div class="tweetusercontent">
+                    <img class = 'tweetpic' src = "<%= @user.avatar%>" alt = "prof pic" >
+                  </div>
+                  <div class="tweetfullname">
+                    <strong><%="#{@user.first_name} #{@user.last_name}"%></strong>
+                  </div>
+                  <div class="tweetusername">
+                    <a href="/users/<%= @user.id%>">@<%= @user.username %></a>
+                  </div>
+                  <div class="tweetusercontent">
+                    <% if (((Time.now - tweet.created_at)/60/60).round) > 23 %>
+                      <p><%= (((Time.now - tweet.created_at)/60/60/24).round) %>d</p>
+                      <% elsif ((((Time.now - tweet.created_at)/60).round) > 60)%>
+                        <p><%= (((Time.now - tweet.created_at)/60/60).round) %>h</p>
+                      <% else %>
+                        <p><%= (((Time.now - tweet.created_at)/60).round) %>m</p>
+                      <% end %>
+                  </div>
+
+              </div>
+                  <div class="tweetcontent">
+                    <p><%= tweet.content %></p>
+                  </div>
+                  <div class="tweetcontent">
+                    <% if tweet.users.include? current_user %>
+                      <p class = "stats"><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(tweet), method: :delete, class: "fav" %></p>
+                    <% else %>
+                      <p class = "stats"><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(tweet), method: :post, class: "nofav" %></p>
+                    <% end %>
+                      <p class = "stats"><%= tweet.favorites.count %> </p>
+
+                      <p class = "stats"><%= link_to "&#10149;".html_safe, new_tweet_reply_path(tweet), class: "nofav"%></p>
+
+                      <p class = "stats"><%= tweet.replies.count %></p>
+
+                      <div class="viewtweet">
+                        <p><%= link_to "View Tweet", tweet_path(tweet) %></p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          <% end %>
+          </ul>
+      </div>
+      </div>
+
+</div>

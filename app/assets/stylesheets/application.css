@@ -16,6 +16,7 @@
 
 html {
   background-color:	#E7ECF0;
+  font-family: helvetica, sans-serif;
 }
 
 body {
@@ -81,6 +82,10 @@ header {
   justify-content: space-around;
 }
 
+.userusername {
+  padding-right: 20px;
+}
+
 .userstats {
   display: flex;
   flex-direction: row;
@@ -112,6 +117,7 @@ header {
   height: 100px;
   border-radius: 50%;
   margin: 10px;
+  border: solid 2px grey;
 }
 
 .tweetShow {
@@ -135,6 +141,7 @@ header {
   border: solid 2px grey;
   width: 500px;
   background-color: white;
+  border-radius: 25px;
 }
 
 .tweetcontent {
@@ -188,4 +195,41 @@ a {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  border: solid 2px grey;
+}
+
+.profpic {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  border: 2px solid grey;
+}
+
+.userpage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.followbutton {
+  margin-top: 50px;
+  margin-right: 20px;
+}
+
+.tweetlabel {
+  margin-top: 260px;
+  text-align: center;
+}
+
+.deletetweet {
+  margin-top: 15px;
+  margin-left: 40px;
+}
+
+.label {
+  text-align: center;
+}
+
+.viewreply {
+  text-align: center;
 }

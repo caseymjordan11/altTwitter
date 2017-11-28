@@ -1,15 +1,104 @@
 <div class="tweetShow">
-  <h4>Replies<%= link_to "(+)", new_tweet_reply_path(@tweet) %></h4>
-  <ol>
+
+
+  <div class="tweetSection">
+        <ul>
+          <div class="tweet">
+            <div class="tweetstats">
+
+
+              <div class="tweetUserInfo">
+                  <div class="tweetusercontent">
+                    <img class = 'tweetpic' src = "<%= @tweet.user.avatar%>" alt = "prof pic" >
+                  </div>
+                  <div class="tweetfullname">
+                    <strong><%="#{@tweet.user.first_name} #{@tweet.user.last_name}"%></strong>
+                  </div>
+                  <div class="tweetusername">
+                    <a href="/users/<%= @tweet.user_id%>">@<%= @tweet.user.username %></a>
+                  </div>
+                  <div class="tweetusercontent">
+                    <% if (((Time.now - @tweet.created_at)/60/60).round) > 23 %>
+                      <p><%= (((Time.now - @tweet.created_at)/60/60/24).round) %>d</p>
+                      <% elsif ((((Time.now - @tweet.created_at)/60).round) > 60)%>
+                        <p><%= (((Time.now - @tweet.created_at)/60/60).round) %>h</p>
+                      <% else %>
+                        <p><%= (((Time.now - @tweet.created_at)/60).round) %>m</p>
+                      <% end %>
+                  </div>
+                  <div class = "deletetweet">
+                    <%= form_for @tweet, method: :delete do |f| %>
+                      <%= f.submit "Delete Tweet"%>
+                    <% end %>
+                  </div>
+              </div>
+                  <div class="tweetcontent">
+                    <p><%= @tweet.content %></p>
+                  </div>
+                  <div class="tweetcontent">
+                    <% if @tweet.users.include? current_user %>
+                      <p class = "stats"><%= link_to "&hearts;".html_safe, remove_favorite_tweet_path(@tweet), method: :delete, class: "fav" %></p>
+                    <% else %>
+                      <p class = "stats"><%= link_to "&hearts;".html_safe, add_favorite_tweet_path(@tweet), method: :post, class: "nofav" %></p>
+                    <% end %>
+                      <p class = "stats"><%= @tweet.favorites.count %> </p>
+
+                      <p class = "stats"><%= link_to "&#10149;".html_safe, new_tweet_reply_path(@tweet), class: "nofav"%></p>
+
+                      <p class = "stats"><%= @tweet.replies.count %></p>
+
+                      <div class="viewtweet">
+                        <p><%= link_to "View Tweet", tweet_path(@tweet) %></p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </ul>
+  </div>
+
+  <div class="label">
+    <h1>Replies:</h1>
+  </div>
+
+  <ul>
     <% @tweet.replies.each do |reply| %>
-    <li>
-      <p><%="#{reply.content}"%> <%= link_to "(view)", tweet_reply_path(@tweet, reply)%></p>
-    </li>
-    <% end %>
-  </ol>
+      <% @user_id = (reply.user_id).to_i %>
+      <div class="tweet">
+        <div class="tweetstats">
+
+
+          <div class="tweetUserInfo">
+              <div class="tweetusercontent">
+                <img class = 'tweetpic' src = "<%= @users.find(@user_id).avatar%>" alt = "prof pic" >
+              </div>
+              <div class="tweetfullname">
+                <strong><%="#{@users.find(@user_id).first_name} #{@users.find(@user_id).last_name}"%></strong>
+              </div>
+              <div class="tweetusername">
+                <a href="/users/<%=reply.user_id%>">@<%= @users.find(@user_id).username %></a>
+              </div>
+              <div class="tweetusercontent">
+                <% if (((Time.now - reply.created_at)/60/60).round) > 23 %>
+                  <p><%= (((Time.now - reply.created_at)/60/60/24).round) %>d</p>
+                  <% elsif ((((Time.now - reply.created_at)/60).round) > 60)%>
+                    <p><%= (((Time.now - reply.created_at)/60/60).round) %>h</p>
+                  <% else %>
+                    <p><%= (((Time.now - reply.created_at)/60).round) %>m</p>
+                  <% end %>
+              </div>
+          </div>
+
+          <div class="tweetcontent">
+            <p><%= reply.content %></p>
+          </div>
+
+          <div class="viewreply">
+              <p><%= link_to "View Reply", tweet_reply_path(reply) %></p>
+          </div>
+
+        </div>
+      </div>
+      <% end %>
+  </ul>
+
 </div>
-
-
-<%= form_for @tweet, method: :delete do |f| %>
-  <%= f.submit "Delete!"%>
-<% end %>
