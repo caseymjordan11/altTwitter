@@ -18,6 +18,10 @@ class User < ApplicationRecord
   has_many :following, through: :follow_relationships, source: :followed
   has_many :followers, through: :followed_relationships, source: :follower
 
+
+
+
+
   def follow(other)
     follow_relationships.create(followed_id: other.id)
   end
