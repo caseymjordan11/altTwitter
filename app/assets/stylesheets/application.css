@@ -14,6 +14,47 @@
  *= require_self
  */
 
+html {
+  background-color:	#E7ECF0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color:
+}
+
+header {
+  font-family: helvetica, sans-serif;
+  background: white;
+  color: black;
+  height: 50px;
+  border-bottom: 2px lightgrey solid;
+}
+
+.head {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+.headCont {
+  font-family: helvetica, sans-serif;
+  font-size: 30px;
+  margin-top: 5px;
+}
+
+.headuser {
+  font-family: helvetica, sans-serif;
+  font-size: 15px;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+
+
 .mainFeed {
   display: flex;
   flex-direction: column;
@@ -34,6 +75,7 @@
   padding: 10px;
   border: solid 2px black;
   width: 500px;
+  background-color: white;
 }
 
 .tweetcontent {

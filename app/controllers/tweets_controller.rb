@@ -3,7 +3,11 @@ class TweetsController < ApplicationController
 
 
   def index
-    @tweets = Tweet.where(user_id: current_user.following.ids)
+    if user_signed_in?
+      @tweets = Tweet.where(user_id: current_user.following.ids)
+    else
+      @tweets = Tweet.all
+    end
 
     @users = User.all
   end

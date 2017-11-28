@@ -10,13 +10,38 @@
 
   <body>
 
-    <%if !current_user%>
-      <p><%= link_to "Sign Up", new_user_registration_path %></p>
-      <p><%= link_to "Sign In", new_user_session_path%></p>
-      <% else%>
-      <p><%=current_user.email%></p>
-      <p><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></p>
-    <% end%>
+  <header>
+    <div class="head">
+          <%if !current_user%>
+            <div class="headuser">
+              <%= link_to "Sign Up", new_user_registration_path %>
+            </div>
+
+            <div class="headCont">
+              altTwitter
+            </div>
+
+            <div class="headuser">
+              <%= link_to "Sign In", new_user_session_path%>
+            </div>
+
+          <% else%>
+
+            <div class="headuser">
+              <%=link_to "My Profile", user_path(current_user)%>
+              <%=link_to "All Users", users_path %>
+            </div>
+
+            <div class="headCont">
+              altTwitter
+            </div>
+
+            <div class="headuser">
+              <%= link_to "Sign Out", destroy_user_session_path, method: :delete%>
+            </div>
+          <% end%>
+        </div>
+    </header>
 
     <nav>
       <p class="notice"><%= notice %></p>
