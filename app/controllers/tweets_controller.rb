@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
     if user_signed_in?
       @tweets = Tweet.where(user_id: current_user.following.ids)
     else
-      @tweets = Tweet.all
+      redirect_to authenticate_user!
     end
 
     @users = User.all
