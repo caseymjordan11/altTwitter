@@ -1,7 +1,7 @@
 class RepliesController < ApplicationController
 
   def show
-    @reply = Reply.find(params[:id])
+    @reply = Reply.find(params[:tweet_id])
   end
 
   def new
@@ -17,8 +17,19 @@ class RepliesController < ApplicationController
     redirect_to tweet_path(@tweet)
   end
 
-  def destroy
+  def edit
     @tweet = Tweet.find(params[:tweet_id])
+    @reply = Reply.find(params[:id])
+  end
+
+  def update
+    @reply = Reply.find(params[:id])
+    @reply.update(reply_params)
+    redirect_to tweet_reply_path(@reply)
+  end
+
+
+  def destroy
     @reply = Reply.find(params[:id])
 
     if @reply.user == current_user
@@ -27,7 +38,7 @@ class RepliesController < ApplicationController
       flash[:alert] = "Only user can delete their own replies"
     end
 
-    redirect_to tweet_path(@tweet)
+    redirect_to tweets_path
   end
 
   private

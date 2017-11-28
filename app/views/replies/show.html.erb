@@ -33,8 +33,14 @@
         </div>
 
 
-        <div class="deletereplt">
-            <p><%= link_to "View Reply", tweet_reply_path(reply) %></p>
+        <div class="updatedeletereply">
+          <div class="editReply">
+            <p><%= link_to "Edit", edit_tweet_reply_path(@reply.tweet, @reply) %></p>
+          </div>
+
+          <div class="deleteReply">
+            <p><%= link_to "Delete", tweet_reply_path(@reply.tweet, @reply), method: :delete%></p>
+          </div>
         </div>
 
 
