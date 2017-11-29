@@ -234,8 +234,27 @@ a {
   text-align: center;
 }
 
+.userpic {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: solid grey 2px;
+}
+
 .updatedeletereply {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.indexpage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userindexinfo {
+  margin-top: 30px;
+  margin-right: 50px;
+  padding-left: 20px;
 }
