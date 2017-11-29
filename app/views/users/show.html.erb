@@ -63,7 +63,13 @@
       <div class="tweetContainer">
         <div class="tweetlabel">
           <% if @user == current_user %>
-            <h1>Tweets: <%= link_to "(+)", new_tweet_path(@tweet) %></h1>
+          <h2 class= "newtweet">
+            What's happening?
+            <%= form_tag tweets_path do %>
+              <%= text_field(:tweet, :content) %>
+              <%= submit_tag "Send Tweet" %>
+            <% end  %>
+          </h2>
           <% else %>
             <h1>Tweets: </h1>
           <% end %>

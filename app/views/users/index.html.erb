@@ -10,7 +10,7 @@
         <div class="userindexinfo">
             <div class="fullname">
                 <strong><%= "#{user.first_name} #{user.last_name}"%></strong>
-                <p>@<%= user.username %></p>
+                <p>@<%= link_to "#{user.username}", user_path(user)%></p>
             </div>
         </div>
       </div>

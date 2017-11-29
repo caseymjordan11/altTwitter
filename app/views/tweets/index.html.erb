@@ -41,9 +41,20 @@
 
 
             <div class="tweetSection">
+
+
+
                   <h2 class= "newtweet">
-                    What's happening? <%= link_to "(+)", new_tweet_path(@tweet) %>
+                    What's happening?
+                    <%= form_tag tweets_path do %>
+                      <%= text_field(:tweet, :content) %>
+                      <%= submit_tag "Send Tweet" %>
+                    <% end  %>
                   </h2>
+
+
+
+
                   <ul>
                     <% @tweets.each do |tweet| %>
                     <% @user_id = (tweet.user_id).to_i %>
