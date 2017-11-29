@@ -33,6 +33,12 @@ header {
   border-bottom: 2px lightgrey solid;
 }
 
+.tweetwidth {
+  width: 400px;
+  text-align: center;
+  word-break: break-all;
+}
+
 .stats {
   padding: 0px 5px;
 }

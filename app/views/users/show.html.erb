@@ -104,7 +104,11 @@
 
               </div>
                   <div class="tweetcontent">
-                    <p><%= tweet.content %></p>
+
+                    <div class="tweetwidth">
+                      <p><%= tweet.content %></p>
+                    </div>
+
                   </div>
                   <div class="tweetcontent">
                     <% if tweet.users.include? current_user %>
