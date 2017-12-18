@@ -8,13 +8,15 @@ class TweetsController < ApplicationController
     else
       redirect_to authenticate_user!
     end
-
+    # instead of using this if / else above, why not just include index in the before_action above?
     @users = User.all
   end
 
   def show
     @tweet = Tweet.find(params[:id])
     @users = User.all
+    # I don't think you should need to pass in the full list of users. Check out my comments
+    # in the show view for more info.
   end
 
   def new
