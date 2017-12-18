@@ -21,7 +21,6 @@ class User < ApplicationRecord
 
 
 
-
   def follow(other)
     follow_relationships.create(followed_id: other.id)
   end
@@ -33,6 +32,8 @@ class User < ApplicationRecord
   def following?(other)
     following.include?(other)
   end
+
+  # Great job implementing the join model and custom methods to set up the follow/following relationships
 
 
 end

@@ -79,6 +79,7 @@
                                 <% else %>
                                   <p><%= (((Time.now - tweet.created_at)/60).round) %>m</p>
                                 <% end %>
+                                <!-- For time formatting, check out strftime method: https://apidock.com/ruby/DateTime/strftime -->
                             </div>
 
                         </div>

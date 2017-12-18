@@ -9,7 +9,8 @@
 
               <div class="tweetUserInfo">
                   <div class="tweetusercontent">
-                    <img class = 'tweetpic' src = "<%= @tweet.user.avatar%>" alt = "prof pic" >
+                    <img class="tweetpic" src = "<%= @tweet.user.avatar%>" alt = "prof pic" >
+                    <!-- No spaces or single quotes in HTML -->
                   </div>
                   <div class="tweetfullname">
                     <strong><%="#{@tweet.user.first_name} #{@tweet.user.last_name}"%></strong>
@@ -63,6 +64,7 @@
   <ul>
     <% @tweet.replies.each do |reply| %>
       <% @user_id = (reply.user_id).to_i %>
+      <!-- You shouldn't need this above variable. Also, when you do, assign it in the controller. -->
       <div class="tweet">
         <div class="tweetstats">
 
@@ -70,6 +72,9 @@
           <div class="tweetUserInfo">
               <div class="tweetusercontent">
                 <img class = 'tweetpic' src = "<%= @users.find(@user_id).avatar%>" alt = "prof pic" >
+                <!-- <img class="tweetpic" src="<%= reply.user.avatar %>" alt="prof pic">
+                You should be able to get the profile picture through simple relationships. If not,
+                set up a relationship between user and reply. -->
               </div>
               <div class="tweetfullname">
                 <strong><%="#{@users.find(@user_id).first_name} #{@users.find(@user_id).last_name}"%></strong>

@@ -37,6 +37,7 @@ header {
   text-align: center;
   word-break: break-all;
 }
+/* mutliword classes should be hypenated (tweet-width) */
 
 .stats {
   padding: 0px 5px;
@@ -263,3 +264,10 @@ a {
   margin-right: 50px;
   padding-left: 20px;
 }
+
+/* Overall, good job keeping your classes small and targeted. However, instead of having
+your class names reflecting *what* they are applied to, they should reflect *how* they
+modify the things they are applied to. For example, instead of `user-page`, it could be
+`centered-page` (or something to that effect.) In doing so, your CSS classes become more reusable
+and can be composed together on elements (via giving that element multiple classes). A good convention
+for using CSS in this way is BEM.  */
